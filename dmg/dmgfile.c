@@ -16,6 +16,7 @@ static void cacheRun(DMG* dmg, BLKXTable* blkx, int run) {
 	void* inBuffer;
 	int ret;
 	size_t have;
+	int bufferRead;
 	
 	if(dmg->runData) {
 		free(dmg->runData);

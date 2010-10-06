@@ -148,6 +148,7 @@ void extractBLKX(AbstractFile* in, AbstractFile* out, BLKXTable* blkx) {
 	off_t initialOffset;
 	int i;
 	int ret;
+	int bufferRead;
 	
 	z_stream strm;
 	
@@ -183,6 +184,7 @@ void extractBLKX(AbstractFile* in, AbstractFile* out, BLKXTable* blkx) {
 		
 		switch(blkx->runs[i].type) {
 		        case BLOCK_ADC:
+				bufferRead = 0;
 				do {
 					ASSERT((strm.avail_in = in->read(in, inBuffer, blkx->runs[i].compLength)) == blkx->runs[i].compLength, "fread");
 					strm.avail_out = adc_decompress(strm.avail_in, inBuffer, bufferSize, outBuffer, &have);
